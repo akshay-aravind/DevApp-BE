@@ -11,6 +11,10 @@ const userRouter = require("./routes/userRoutes");
 app.use(express.json());
 app.use(cookieparser());
 
+app.use((req, res, next) => {
+  console.log("HIT:", req.method, req.url);
+  next();
+});
 
 app.use("/", authRouter)
 app.use("/", profileRouter)
@@ -20,6 +24,7 @@ app.use("/", userRouter)
 app.use("/",authRouter, (err, req, res, next) => {
   console.log(err);
 });
+
 
 
 connectDB()
